@@ -3,6 +3,8 @@
 1. [Módulo 1: Introducción a Elasticsearch](#schema1)
 2. [Instalar Elasticsearch](#schema2)
 3. [Ejercicio 1: Configuración de Elasticsearch](#schema3)
+4. [Ejercicio 2: Creación de un índice y carga de documentos](#schema4)
+5. [Ver el Índice y Documentos en localhost](#schema5)
 
 
 <hr>
@@ -132,3 +134,68 @@
         xpack.security.enabled: false
     ```
 ![localhost](./img/localhost.jpg)
+
+<hr>
+
+<a name="schema4"></a>
+
+## 4. Ejercicio 2: Creación de un índice y carga de documentos
+1. Crear un índice: Usa la API REST de Elasticsearch para crear un índice llamado library. En este caso, utilizaremos curl desde la línea de comandos. Asegúrate de que el servidor Elasticsearch esté corriendo en localhost:9200 o ajusta la URL según sea necesario.
+    ```bash
+    curl -X PUT "localhost:9200/library" -H 'Content-Type: application/json'
+    ```
+2. Agregar documentos: Inserta un documento de ejemplo en el índice library.
+    ```bash
+    curl -X POST "localhost:9200/library/_doc/1" -H 'Content-Type: application/json' -d'
+    {
+    "title": "Elasticsearch Basics",
+    "author": "John Doe",
+    "published_year": 2023
+    }
+    '
+    ```
+
+3. Consulta el documento: Realiza una búsqueda básica en el índice library.
+    ```bash
+    curl -X GET "localhost:9200/library/_search" -H 'Content-Type: application/json' -d'
+    {
+    "query": {
+        "match": {
+        "title": "Elasticsearch"
+        }
+    }
+    }
+    '
+    ```
+
+<hr>
+
+<a name="schema5"></a>
+
+## 5. Ver el Índice y Documentos en localhost
+1. Verificar que el Índice Exista
+    - Primero, asegúrate de que el índice library se haya creado correctamente. Puedes hacerlo con el siguiente comando curl:
+
+        ```bash
+        curl -X GET "localhost:9200/_cat/indices?v"
+        ```
+    - Este comando te mostrará una lista de todos los índices disponibles. Busca library en la lista.
+
+2. Consultar Documentos en el Índice
+
+    - Puedes realizar una búsqueda en el índice library para ver los documentos que contiene. Usa el siguiente comando:
+
+        ```bash
+        curl -X GET "localhost:9200/library/_search?pretty"
+        ```
+        - El parámetro pretty hace que la salida sea más legible, con una estructura de datos formateada en JSON.
+
+3. Ver un Documento Específico
+
+    - Si conoces el ID del documento (en tu caso, 1), puedes recuperarlo directamente con el siguiente comando:
+
+        ```bash
+        curl -X GET "localhost:9200/library/_doc/1?pretty"
+        ```
+    - Esto debería devolverte el documento con ID 1 que has insertado previamente.
+
