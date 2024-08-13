@@ -199,3 +199,32 @@
         ```
     - Esto debería devolverte el documento con ID 1 que has insertado previamente.
 
+
+## 6. Introducción a FSCrawler
+
+### Qué es FSCrawler
+- FSCrawler es una herramienta para indexar archivos del sistema de archivos en Elasticsearch. Puede manejar diferentes tipos de archivos y extraer tanto contenido como metadatos para su indexación.
+- Conceptos clave:
+    - Job: Una tarea configurada en FSCrawler para escanear un directorio específico y enviar los datos a Elasticsearch.
+    - Mapping: La estructura de los documentos indexados, especificada en Elasticsearch.
+
+### Ejercicio 3: Instalación y configuración de FSCrawler
+1. Instalación: Descarga e instala FSCrawler.
+[Instrucciones de instalación](https://fscrawler.readthedocs.io/en/latest/installation.html)
+
+    1. **Instalar Java**
+        - Para más información sobre la instalación de java ir [Primeros pasos con Mac](https://github.com/patri-carrasco/primeros-pasos-mac)
+
+    2. **Descargar FSCrawler**
+         - Para más información sobre la instalación de Fscrawler [Primeros pasos con Mac](https://github.com/patri-carrasco/primeros-pasos-mac)
+      
+
+2. Configuración básica:
+    - Crea un job básico que escanee un directorio local (/path/to/your/files).
+        ```bash
+        /.fscrawler job_name --url "http://localhost:9200"
+        ```
+    - Configura el archivo `job_name/_settings.json` para definir los parámetros del job (como el directorio a escanear, tipos de archivos permitidos, etc.).
+
+
+Nota: Tras varios intentos de configurar fscrawler, dejo este ejercicio.
